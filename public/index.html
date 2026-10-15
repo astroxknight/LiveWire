@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101312">
+  <title>Livewire — messages, in real time</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main id="app">
+    <section id="auth-view" class="auth-shell">
+      <div class="brand"><span class="brand-mark">↗</span><span>livewire</span></div>
+      <div class="auth-card">
+        <p class="eyebrow">MESSAGING, IN REAL TIME</p>
+        <h1>Words before<br><em>they're sent.</em></h1>
+        <p class="muted">See a conversation unfold as it happens.</p>
+        <form id="auth-form">
+          <label>Username<input name="username" autocomplete="username" minlength="3" maxlength="20" required placeholder="e.g. alex_dev"></label>
+          <label>Password<input name="password" type="password" autocomplete="current-password" minlength="4" required placeholder="At least 4 characters"></label>
+          <button class="primary" type="submit" id="auth-submit">Sign in</button>
+        </form>
+        <p id="auth-error" class="error" role="alert"></p>
+        <button id="auth-toggle" class="text-button" type="button">New here? Create an account</button>
+      </div>
+      <p class="footnote">A small real-time messaging prototype.</p>
+    </section>
+
+    <section id="chat-view" class="chat-shell hidden">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">↗</span><span>livewire</span></div>
+        <div class="sidebar-heading"><span>CONVERSATIONS</span><button id="refresh-users" title="Refresh users">↻</button></div>
+        <div id="user-list" class="user-list"></div>
+        <div class="account"><div class="avatar" id="my-avatar">?</div><div class="account-name"><strong id="my-name"></strong><small>Signed in</small></div><button id="logout" class="icon-button" title="Sign out">↗</button></div>
+      </aside>
+      <section class="conversation">
+        <header class="conversation-header">
+          <div class="avatar" id="peer-avatar">?</div>
+          <div class="peer-meta"><strong id="peer-name">Choose a conversation</strong><small id="connection-state">Connecting…</small></div>
+          <span class="live-pill"><span></span> LIVE DRAFTS</span>
+        </header>
+        <div id="messages" class="messages">
+          <div class="empty-state"><div class="empty-symbol">↗</div><h2>Your words, in motion.</h2><p>Choose someone from the sidebar to start a conversation.</p></div>
+        </div>
+        <div id="draft-indicator" class="draft-indicator hidden"><span class="typing-dot"></span><span id="draft-label">Live draft</span></div>
+        <form id="message-form" class="composer">
+          <textarea id="message-input" rows="1" maxlength="4000" placeholder="Choose someone to start writing…" disabled></textarea>
+          <div class="composer-bottom"><span id="composer-hint">Drafts are visible to the person you're chatting with.</span><button class="send-button" id="send-button" disabled type="submit">Send <span>↗</span></button></div>
+        </form>
+      </section>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
