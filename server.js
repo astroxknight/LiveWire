@@ -9,7 +9,7 @@ const cookie = require("cookie");
 const Database = require("better-sqlite3");
 const { WebSocketServer, WebSocket } = require("ws");
 
-const PORT = Number(process.env.PORT || 3000);
+const PORT = Number(process.env.PORT || 3001);
 const JWT_SECRET = process.env.JWT_SECRET || "dev-only-change-this-secret-before-deploying";
 const COOKIE_NAME = "livewire_session";
 const app = express();
@@ -68,7 +68,7 @@ function requireAuth(req, res, next) {
 }
 // Parse cookies without adding another middleware dependency.
 app.use((req, _res, next) => {
-  req.cookies = cookie.parse(req.headers.cookie || "");
+  req.cookies = cookie.parseCookie(req.headers.cookie || "");
   next();
 });
 
@@ -172,7 +172,7 @@ function broadcastToConversation(key, payload) {
 }
 
 server.on("upgrade", (req, socket, head) => {
-  const cookies = cookie.parse(req.headers.cookie || "");
+  const cookies = cookie.parseCookie(req.headers.cookie || "");
   const user = getUserFromToken(cookies[COOKIE_NAME]);
   if (!user) {
     socket.write("HTTP/1.1 401 Unauthorized\r\nConnection: close\r\n\r\n");

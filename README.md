@@ -1,6 +1,6 @@
 # Livewire
 
-A web messaging prototype where a recipient can see a sender's draft update live while the sender types, alongside ordinary sent messages.
+A real-time web messaging prototype where a recipient can see a sender's draft update live while the sender types, alongside ordinary sent messages.
 
 ## Requirements
 
@@ -11,9 +11,7 @@ A web messaging prototype where a recipient can see a sender's draft update live
 
 ```bash
 npm install
-cp .env.example .env
-# Set JWT_SECRET to a long random value in .env before exposing the app.
-npm start
+node server.js
 ```
 
 Open http://localhost:3000 in two separate browser profiles. Register two accounts (each username is unique), sign in as one in each profile, and open each other's conversation. Type in one window; the other should see the live draft. Press **Send** to persist and deliver a normal message.
@@ -38,14 +36,14 @@ Browser (HTML/CSS/JS)
 
 ```text
 livewire-messaging/
-├── public/
-│   ├── index.html     # app shell and auth form
-│   ├── styles.css     # responsive dark UI
-│   └── app.js         # browser state, REST, WebSocket and rendering
-├── server.js          # API, authentication, SQLite and WebSocket events
-├── package.json
-├── .env.example
-├── .gitignore
+├ public/
+│   ├── index.html   # app shell and auth form
+│   ├── styles.css   # responsive dark UI
+│   └── app.js       # browser state, REST, WebSocket and rendering
+├ server.js          # API, authentication, SQLite and WebSocket events
+├ package.json
+├ .env.example
+├ .gitignore
 └── README.md
 ```
 
@@ -62,11 +60,11 @@ Server → client:
 
 Drafts are not written to the database. Sent messages are stored in SQLite and loaded through the REST API.
 
-## Important prototype limitations
+## Limitations
 
-This is a learning/MVP implementation, not a production-ready messenger:
+This is a learning/MVP implementation, not production-ready:
 - No end-to-end encryption; TLS must be terminated by HTTPS/WSS in deployment.
-- No rate limiting, email verification, account recovery, device/session management, or moderation.
+- No rate limiting, email verification, account recovery, moderation.
 - Session tokens last seven days. Change `JWT_SECRET` and configure HTTPS before deployment.
 - Live drafts are ephemeral. If the recipient is offline or viewing another conversation, they won't receive that update.
 - For a multi-instance deployment, use a shared pub/sub layer (e.g. Redis) and a persistent production database.

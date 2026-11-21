@@ -203,6 +203,18 @@ input.addEventListener("input", () => {
     lastDraftSent = body;
   }, 35);
 });
+
+// Enter to send, Shift+Enter for new line
+input.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    if (event.shiftKey) {
+      // Allow new line (default textarea behavior)
+      return;
+    }
+    event.preventDefault();
+    $("#message-form").dispatchEvent(new Event("submit", { cancelable: true }));
+  }
+});
 $("#message-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!selected || !input.value.trim()) return;
